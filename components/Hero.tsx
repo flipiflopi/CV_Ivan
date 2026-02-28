@@ -1,11 +1,12 @@
 import { MapPin, ArrowDown } from 'lucide-react'
+import TikTokIcon from './TikTokIcon'
 
 export default function Hero() {
   return (
     <section className="min-h-screen flex items-center pt-16">
       <div className="max-w-5xl mx-auto px-6 py-24 w-full">
-        {/* Badge */}
-        <div className="flex items-center gap-2 mb-8">
+        {/* Badges */}
+        <div className="flex flex-wrap items-center gap-2 mb-8">
           <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 border border-gray-200 px-3 py-1.5 rounded-full">
             <MapPin className="w-3 h-3" />
             Málaga, España
@@ -14,6 +15,15 @@ export default function Hero() {
             <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
             Disponible · Verano 2026
           </span>
+          <a
+            href="https://www.tiktok.com/@de0a100conIA"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-600 border border-gray-200 px-3 py-1.5 rounded-full hover:border-gray-400 transition-colors"
+          >
+            <TikTokIcon className="w-3 h-3" />
+            @de0a100conIA · 700 seguidores
+          </a>
         </div>
 
         {/* Name */}

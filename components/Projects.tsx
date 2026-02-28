@@ -1,40 +1,5 @@
-import { MapPin, PhoneCall, Workflow } from 'lucide-react'
-
-const projects = [
-  {
-    icon: MapPin,
-    iconBg: 'bg-emerald-50',
-    iconColor: 'text-emerald-600',
-    title: 'Adventure Map',
-    description:
-      'App móvil tipo red social para descubrir y compartir spots de aventura: saltos al agua, miradores, cuevas y piscinas naturales. Los usuarios añaden, votan y descubren los mejores lugares.',
-    tech: ['Flutter', 'Firebase', 'Google Maps API'],
-    status: 'En desarrollo',
-    statusColor: 'bg-emerald-50 text-emerald-700',
-  },
-  {
-    icon: PhoneCall,
-    iconBg: 'bg-blue-50',
-    iconColor: 'text-blue-600',
-    title: 'Agente de Voz para Cerrajeros',
-    description:
-      'Recepcionista IA que gestiona llamadas de forma autónoma para negocios de cerrajería. Responde consultas, filtra urgencias y recoge datos del cliente 24/7 sin intervención humana.',
-    tech: ['VAPI', 'ElevenLabs', 'Retell AI', 'n8n'],
-    status: 'Completado',
-    statusColor: 'bg-gray-100 text-gray-600',
-  },
-  {
-    icon: Workflow,
-    iconBg: 'bg-amber-50',
-    iconColor: 'text-amber-600',
-    title: 'Automatizaciones Empresariales',
-    description:
-      'Flujos automáticos para empresas: scraping de negocios para una lotería en Mallorca, generador de contenido para redes sociales y pipelines de datos a medida.',
-    tech: ['n8n', 'Make', 'OpenAI API', 'APIs REST'],
-    status: 'Varios clientes',
-    statusColor: 'bg-amber-50 text-amber-700',
-  },
-]
+import { ArrowRight } from 'lucide-react'
+import { projects } from '@/lib/projects'
 
 export default function Projects() {
   return (
@@ -57,43 +22,59 @@ export default function Projects() {
             const Icon = project.icon
             return (
               <div
-                key={project.title}
-                className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-shadow duration-300 flex flex-col"
+                key={project.slug}
+                className="bg-white rounded-2xl border border-gray-100 hover:shadow-md transition-shadow duration-300 flex flex-col overflow-hidden"
               >
-                {/* Icon */}
+                {/* Image / placeholder */}
                 <div
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center mb-5 ${project.iconBg}`}
+                  className={`w-full h-36 bg-gradient-to-br ${project.placeholderGradient} flex items-center justify-center flex-shrink-0`}
                 >
-                  <Icon className={`w-5 h-5 ${project.iconColor}`} />
+                  <Icon className={`w-8 h-8 ${project.iconColor} opacity-40`} />
                 </div>
 
-                {/* Title + status */}
-                <div className="flex items-start justify-between gap-2 mb-3">
-                  <h3 className="font-semibold text-gray-900 text-sm leading-snug">
-                    {project.title}
-                  </h3>
-                  <span
-                    className={`text-xs px-2 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 ${project.statusColor}`}
-                  >
-                    {project.status}
-                  </span>
-                </div>
-
-                {/* Description */}
-                <p className="text-sm text-gray-500 leading-relaxed mb-5 flex-1">
-                  {project.description}
-                </p>
-
-                {/* Tech tags */}
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tech.map((t) => (
+                <div className="p-6 flex flex-col flex-1">
+                  {/* Title + status */}
+                  <div className="flex items-start justify-between gap-2 mb-3">
+                    <h3 className="font-semibold text-gray-900 text-sm leading-snug">
+                      {project.title}
+                    </h3>
                     <span
-                      key={t}
-                      className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full"
+                      className={`text-xs px-2 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 ${project.statusColor}`}
                     >
-                      {t}
+                      {project.status}
                     </span>
-                  ))}
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm text-gray-500 leading-relaxed mb-5 flex-1">
+                    {project.shortDescription}
+                  </p>
+
+                  {/* Tech tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {project.tech.slice(0, 3).map((t) => (
+                      <span
+                        key={t}
+                        className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                    {project.tech.length > 3 && (
+                      <span className="text-xs bg-gray-100 text-gray-400 px-2.5 py-1 rounded-full">
+                        +{project.tech.length - 3}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Link */}
+                  <a
+                    href={`/proyectos/${project.slug}`}
+                    className="inline-flex items-center gap-1.5 text-sm text-gray-700 hover:text-gray-900 font-medium transition-colors group"
+                  >
+                    Ver proyecto
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  </a>
                 </div>
               </div>
             )
