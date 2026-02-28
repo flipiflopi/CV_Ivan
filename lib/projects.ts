@@ -13,6 +13,9 @@ export type Project = {
   status: string
   statusColor: string
   images: string[]
+  // 'columns' → fila de fotos portrait (móvil)
+  // 'stack'   → fotos apiladas full-width una debajo de la otra
+  galleryLayout: 'columns' | 'stack'
   tiktokUrl?: string
   demoUrl?: string
 }
@@ -41,6 +44,7 @@ export const projects: Project[] = [
       '/images/adventure-map-3.jpeg',
       '/images/adventure-map-4.jpeg',
     ],
+    galleryLayout: 'columns',
   },
   {
     slug: 'agente-de-voz',
@@ -65,6 +69,7 @@ export const projects: Project[] = [
       '/images/agente-de-voz-2.png',
       '/images/agente-de-voz-3.png',
     ],
+    galleryLayout: 'stack',
     tiktokUrl: 'https://www.tiktok.com/@de0a100conIA',
   },
   {
@@ -89,6 +94,7 @@ export const projects: Project[] = [
       '/images/automatizaciones-2.png',
       '/images/automatizaciones-3.png',
     ],
+    galleryLayout: 'stack',
     tiktokUrl: 'https://www.tiktok.com/@de0a100conIA',
   },
 ]

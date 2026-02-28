@@ -79,43 +79,50 @@ export default function ProjectPage({ params }: Props) {
           {/* Galería de imágenes */}
           {project.images.length > 0 ? (
             <div className="mb-10">
-              {/* Imagen principal */}
-              <div className="relative aspect-video rounded-2xl overflow-hidden mb-3">
-                <Image
-                  src={project.images[0]}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 768px"
-                  priority
-                />
-              </div>
 
-              {/* Resto de imágenes en grid */}
-              {project.images.length > 1 && (
-                <div
-                  className={`grid gap-3 ${
-                    project.images.slice(1).length >= 3
-                      ? 'grid-cols-3'
-                      : 'grid-cols-2'
-                  }`}
-                >
-                  {project.images.slice(1).map((img, i) => (
+              {/* COLUMNS: capturas de móvil en portrait, todas en una fila */}
+              {project.galleryLayout === 'columns' && (
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {project.images.map((img, i) => (
                     <div
                       key={i}
-                      className="relative aspect-video rounded-xl overflow-hidden"
+                      className="relative rounded-2xl overflow-hidden bg-gray-100"
+                      style={{ aspectRatio: '9 / 19' }}
                     >
                       <Image
                         src={img}
-                        alt={`${project.title} ${i + 2}`}
+                        alt={`${project.title} pantalla ${i + 1}`}
                         fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 50vw, 256px"
+                        className="object-contain"
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                        priority={i === 0}
                       />
                     </div>
                   ))}
                 </div>
               )}
+
+              {/* STACK: imágenes apiladas full-width, todas del mismo tamaño */}
+              {project.galleryLayout === 'stack' && (
+                <div className="flex flex-col gap-4">
+                  {project.images.map((img, i) => (
+                    <div
+                      key={i}
+                      className="relative aspect-video rounded-2xl overflow-hidden"
+                    >
+                      <Image
+                        src={img}
+                        alt={`${project.title} ${i + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 768px"
+                        priority={i === 0}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+
             </div>
           ) : (
             <div
