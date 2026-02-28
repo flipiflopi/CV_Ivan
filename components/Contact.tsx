@@ -30,7 +30,7 @@ const contactLinks = [
     icon: null,
     isTikTok: true,
     label: 'TikTok',
-    value: '@de0a100conIA · 700 seguidores',
+    value: '@de0a100conIA',
     href: 'https://www.tiktok.com/@de0a100conIA',
     external: true,
   },

@@ -2,6 +2,9 @@ import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { projects } from '@/lib/projects'
 
+const BLUR_DATA_URL =
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN88P9/HQAIdgN9pHTGJwAAAABJRU5ErkJggg=='
+
 export default function Projects() {
   return (
     <section id="proyectos" className="py-24 bg-gray-50">
@@ -35,6 +38,9 @@ export default function Projects() {
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 33vw"
+                      quality={75}
+                      placeholder="blur"
+                      blurDataURL={BLUR_DATA_URL}
                     />
                   </div>
                 ) : (

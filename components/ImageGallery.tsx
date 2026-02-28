@@ -4,6 +4,10 @@ import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 
+// Placeholder gris que aparece instantáneamente mientras carga la imagen real
+const BLUR_DATA_URL =
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN88P9/HQAIdgN9pHTGJwAAAABJRU5ErkJggg=='
+
 type Props = {
   images: string[]
   title: string
@@ -60,8 +64,10 @@ export default function ImageGallery({ images, title, galleryLayout }: Props) {
                 fill
                 className="object-contain transition-transform duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 50vw, 25vw"
-                quality={90}
-                priority={i === 0}
+                quality={75}
+                priority={i < 2}
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
               />
             </button>
           ))}
@@ -83,9 +89,11 @@ export default function ImageGallery({ images, title, galleryLayout }: Props) {
                 alt={`${title} ${i + 1}`}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 768px"
-                quality={90}
+                sizes="(max-width: 768px) 100vw, 720px"
+                quality={75}
                 priority={i === 0}
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
               />
             </button>
           ))}
@@ -138,7 +146,9 @@ export default function ImageGallery({ images, title, galleryLayout }: Props) {
               fill
               className="object-contain"
               sizes="100vw"
-              quality={100}
+              quality={85}
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
               priority
             />
           </div>

@@ -22,7 +22,7 @@ export default function Hero() {
             className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-600 border border-gray-200 px-3 py-1.5 rounded-full hover:border-gray-400 transition-colors"
           >
             <TikTokIcon className="w-3 h-3" />
-            @de0a100conIA · 700 seguidores
+            @de0a100conIA
           </a>
         </div>
 
