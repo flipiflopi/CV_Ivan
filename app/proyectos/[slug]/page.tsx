@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { projects } from '@/lib/projects'
 import Header from '@/components/Header'
@@ -75,22 +76,54 @@ export default function ProjectPage({ params }: Props) {
             ))}
           </div>
 
-          {/* Imagen / placeholder
-              Para añadir tu captura real:
-              1. Coloca el archivo en public/images/<slug>.jpg
-              2. Añade image: '/images/<slug>.jpg' al proyecto en lib/projects.ts
-              3. Reemplaza este bloque por <Image src={project.image} ... />
-          */}
-          <div
-            className={`w-full h-56 md:h-72 rounded-2xl bg-gradient-to-br ${project.placeholderGradient} flex items-center justify-center mb-10 border border-gray-100`}
-          >
-            <div className="text-center">
-              <Icon className={`w-10 h-10 ${project.iconColor} mx-auto mb-2 opacity-40`} />
-              <p className="text-xs text-gray-400">
-                Añade tu captura en public/images/{project.slug}.jpg
-              </p>
+          {/* Galería de imágenes */}
+          {project.images.length > 0 ? (
+            <div className="mb-10">
+              {/* Imagen principal */}
+              <div className="relative aspect-video rounded-2xl overflow-hidden mb-3">
+                <Image
+                  src={project.images[0]}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  priority
+                />
+              </div>
+
+              {/* Resto de imágenes en grid */}
+              {project.images.length > 1 && (
+                <div
+                  className={`grid gap-3 ${
+                    project.images.slice(1).length >= 3
+                      ? 'grid-cols-3'
+                      : 'grid-cols-2'
+                  }`}
+                >
+                  {project.images.slice(1).map((img, i) => (
+                    <div
+                      key={i}
+                      className="relative aspect-video rounded-xl overflow-hidden"
+                    >
+                      <Image
+                        src={img}
+                        alt={`${project.title} ${i + 2}`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 50vw, 256px"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
+          ) : (
+            <div
+              className={`w-full h-56 md:h-72 rounded-2xl bg-gradient-to-br ${project.placeholderGradient} flex items-center justify-center mb-10 border border-gray-100`}
+            >
+              <Icon className={`w-10 h-10 ${project.iconColor} mx-auto opacity-40`} />
+            </div>
+          )}
 
           {/* Descripción */}
           <div className="space-y-4 mb-12">

@@ -12,8 +12,7 @@ export type Project = {
   tech: string[]
   status: string
   statusColor: string
-  // Coloca tus capturas en public/images/<slug>.jpg y descomenta el campo image
-  // image: string
+  images: string[]
   tiktokUrl?: string
   demoUrl?: string
 }
@@ -36,6 +35,12 @@ export const projects: Project[] = [
     tech: ['Flutter', 'Firebase', 'Google Maps API', 'Cloud Firestore'],
     status: 'En desarrollo',
     statusColor: 'bg-emerald-50 text-emerald-700',
+    images: [
+      '/images/adventure-map-1.jpeg',
+      '/images/adventure-map-2.jpeg',
+      '/images/adventure-map-3.jpeg',
+      '/images/adventure-map-4.jpeg',
+    ],
   },
   {
     slug: 'agente-de-voz',
@@ -50,10 +55,16 @@ export const projects: Project[] = [
       'Un agente de voz basado en inteligencia artificial que actúa como recepcionista virtual para negocios de cerrajería. Atiende llamadas 24/7 sin intervención humana.',
       'El agente responde preguntas frecuentes, identifica el tipo de urgencia, recoge los datos del cliente y puede transferir la llamada o notificar al cerrajero en tiempo real mediante automatizaciones de n8n.',
       'Construido sobre VAPI y Retell AI para la gestión de llamadas, con voces naturales generadas por ElevenLabs y toda la lógica de backend orquestada desde n8n.',
+      'El sistema incluye un CRM donde el cliente puede consultar el historial de llamadas, los datos recogidos por el agente y el estado de cada contacto, todo centralizado en un único panel.',
     ],
     tech: ['VAPI', 'ElevenLabs', 'Retell AI', 'n8n', 'OpenAI'],
     status: 'Completado',
     statusColor: 'bg-gray-100 text-gray-600',
+    images: [
+      '/images/agente-de-voz-1.png',
+      '/images/agente-de-voz-2.png',
+      '/images/agente-de-voz-3.png',
+    ],
     tiktokUrl: 'https://www.tiktok.com/@de0a100conIA',
   },
   {
@@ -73,6 +84,11 @@ export const projects: Project[] = [
     tech: ['n8n', 'Make', 'OpenAI API', 'APIs REST', 'Webhooks'],
     status: 'Varios clientes',
     statusColor: 'bg-amber-50 text-amber-700',
+    images: [
+      '/images/automatizaciones-1.png',
+      '/images/automatizaciones-2.png',
+      '/images/automatizaciones-3.png',
+    ],
     tiktokUrl: 'https://www.tiktok.com/@de0a100conIA',
   },
 ]

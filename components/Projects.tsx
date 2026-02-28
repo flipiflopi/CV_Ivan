@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { projects } from '@/lib/projects'
 
@@ -26,11 +27,23 @@ export default function Projects() {
                 className="bg-white rounded-2xl border border-gray-100 hover:shadow-md transition-shadow duration-300 flex flex-col overflow-hidden"
               >
                 {/* Image / placeholder */}
-                <div
-                  className={`w-full h-36 bg-gradient-to-br ${project.placeholderGradient} flex items-center justify-center flex-shrink-0`}
-                >
-                  <Icon className={`w-8 h-8 ${project.iconColor} opacity-40`} />
-                </div>
+                {project.images.length > 0 ? (
+                  <div className="relative h-36 flex-shrink-0 overflow-hidden">
+                    <Image
+                      src={project.images[0]}
+                      alt={project.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className={`w-full h-36 bg-gradient-to-br ${project.placeholderGradient} flex items-center justify-center flex-shrink-0`}
+                  >
+                    <Icon className={`w-8 h-8 ${project.iconColor} opacity-40`} />
+                  </div>
+                )}
 
                 <div className="p-6 flex flex-col flex-1">
                   {/* Title + status */}
