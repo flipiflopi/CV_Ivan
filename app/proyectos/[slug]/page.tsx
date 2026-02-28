@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { projects } from '@/lib/projects'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import TikTokIcon from '@/components/TikTokIcon'
+import ImageGallery from '@/components/ImageGallery'
 
 type Props = { params: { slug: string } }
 
@@ -79,50 +79,11 @@ export default function ProjectPage({ params }: Props) {
           {/* Galería de imágenes */}
           {project.images.length > 0 ? (
             <div className="mb-10">
-
-              {/* COLUMNS: capturas de móvil en portrait, todas en una fila */}
-              {project.galleryLayout === 'columns' && (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {project.images.map((img, i) => (
-                    <div
-                      key={i}
-                      className="relative rounded-2xl overflow-hidden bg-gray-100"
-                      style={{ aspectRatio: '9 / 19' }}
-                    >
-                      <Image
-                        src={img}
-                        alt={`${project.title} pantalla ${i + 1}`}
-                        fill
-                        className="object-contain"
-                        sizes="(max-width: 768px) 50vw, 25vw"
-                        priority={i === 0}
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* STACK: imágenes apiladas full-width, todas del mismo tamaño */}
-              {project.galleryLayout === 'stack' && (
-                <div className="flex flex-col gap-4">
-                  {project.images.map((img, i) => (
-                    <div
-                      key={i}
-                      className="relative aspect-video rounded-2xl overflow-hidden"
-                    >
-                      <Image
-                        src={img}
-                        alt={`${project.title} ${i + 1}`}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 768px"
-                        priority={i === 0}
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-
+              <ImageGallery
+                images={project.images}
+                title={project.title}
+                galleryLayout={project.galleryLayout}
+              />
             </div>
           ) : (
             <div
